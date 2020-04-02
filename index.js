@@ -1,10 +1,25 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
-require('dotenv').config({path: 'variables.env'});
 const router = require('./routes/index');
-const path = require('path')
+const path = require('path');
+const bodyParser = require('body-parser');
 
+//Variables de desarrollo
+require('dotenv').config({path: 'variables.env'});
+
+//Modelos
+require('./models/Usuarios');
+
+//conexion con la DB
+const db = require('./config/db');
+db.sync().then(() => console.log('DB CONECTADA')).catch((error)=> console.log(error));
+
+//App  principal
 const app = express();
+
+//Body Parser, leer formularios
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 //HABILITAR EJS COMO TEMPLATE ENGINE //ESTO SI O SI TIENE QUE IR ANTES DEL ROUTING SI NO NO EJECUTA expressLayouts
 app.use(expressLayouts);
