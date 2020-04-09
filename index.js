@@ -14,6 +14,8 @@ require('dotenv').config({path: 'variables.env'});
 
 //Modelos
 require('./models/Usuarios');
+require('./models/Categorias');
+require('./models/Grupos');
 
 //conexion con la DB
 const db = require('./config/db');
