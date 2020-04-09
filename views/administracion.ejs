@@ -1,0 +1,50 @@
+<main class="contenedor panel-administracion">
+    <h1><%= nombrePagina %></h1>
+
+    <div class="contenedor-botones">
+        <a href="/nuevo-grupo" class="btn btn-amarillo">Nuevo Grupo</a>
+        <a href="/nuevo-meeti" class="btn btn-azul">Nuevo Meeti</a>
+        <a href="/editar-perfil" class="btn btn-rosa">Editar Perfil</a>
+        <a href="/cambiar-password" class="btn btn-verde">Cambiar Password</a>
+        <a href="/imagen-perfil" class="btn btn-amarillo">Imagen Perfil</a>
+    </div>
+
+    <div class="seccion-admin">
+        <h2>Próximos Meeti's</h2>
+        
+        <ul>
+            
+            <li>
+                <div class="informacion-admin">
+                    <p class="fecha">22 de mayo de 2020</p>
+                    <a href="/meeti/" target="_blank">
+                        <h3>Node.js</h3>
+                    </a>
+                    <small>26 Interesados</small>
+                </div>
+                <div class="acciones contenedor-botones">
+                    <a href="/editar-meeti/" class="btn btn-verde">Editar</a>
+                    <a href="/asistentes-meeti/" class="btn btn-azul2">Asistentes</a>
+                    <a href="/eliminar-meeti/" class="btn btn-rojo">Eliminar</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="seccion-admin">
+        <h2>Tus Grupos</h2>
+            
+            <ul>
+                
+                <li>
+                    <div class="informacion-admin">
+                        <h3>Boca Juniors</h3>
+                    </div>
+                    <div class="acciones contenedor-botones">
+                        <a href="/editar-grupo/" class="btn btn-verde">Editar</a>
+                        <a href="/imagen-grupo/" class="btn btn-azul2">Imagen</a>
+                        <a href="/eliminar-grupo/" class="btn btn-rojo">Eliminar</a>
+                    </div>
+                </li>
+            </ul>
+    </div>
+</main>
