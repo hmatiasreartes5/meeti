@@ -1,7 +1,10 @@
+const Grupos = require('../models/Grupos');
 
+exports.panelAdministracion = async (req,res) => {
+    const grupos = await Grupos.findAll({where : {usuarioId: req.user.id}})
 
-exports.panelAdministracion = (req,res) => {
     res.render('administracion',{
-        nombrePagina: 'Administracion'
+        nombrePagina: 'Administracion',
+        grupos
     })
 }
