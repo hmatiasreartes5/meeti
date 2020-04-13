@@ -12,23 +12,30 @@
     <div class="seccion-admin">
         <h2>Próximos Meeti's</h2>
         
-        <ul>
-            
-            <li>
-                <div class="informacion-admin">
-                    <p class="fecha">22 de mayo de 2020</p>
-                    <a href="/meeti/" target="_blank">
-                        <h3>Node.js</h3>
-                    </a>
-                    <small>26 Interesados</small>
-                </div>
-                <div class="acciones contenedor-botones">
-                    <a href="/editar-meeti/" class="btn btn-verde">Editar</a>
-                    <a href="/asistentes-meeti/" class="btn btn-azul2">Asistentes</a>
-                    <a href="/eliminar-meeti/" class="btn btn-rojo">Eliminar</a>
-                </div>
-            </li>
-        </ul>
+        <% if(meeti.length > 0 ) { %>
+            <ul>
+                <% meeti.forEach(meet => { %>
+                <li>
+                    <div class="informacion-admin">
+                        <% moment.locale('es'); %>
+                        <% const fecha = meet.fecha +' '+ meet.hora;  %>
+                        <p class="fecha"><%= moment( fecha ).format('LLLL');  %> Horas</p>
+                        <a href="/meeti/<%= meet.slug %>" target="_blank">
+                            <h3><%= meet.titulo %></h3>
+                        </a>
+                        <small><%= meet.interesados.length %> Interesados</small>
+                    </div>
+                    <div class="acciones contenedor-botones">
+                        <a href="/editar-meeti/<%= meet.id %>" class="btn btn-verde">Editar</a>
+                        <a href="/asistentes-meeti/<%= meet.id %>" class="btn btn-azul2">Asistentes</a>
+                        <a href="/eliminar-meeti/<%= meet.id %>" class="btn btn-rojo">Eliminar</a>
+                    </div>
+                </li>
+                <% }) %>
+            </ul>
+            <% } else { %>
+                <p>Aún no tienes meeti's creados</p>
+            <% } %>
     </div>
     <div class="seccion-admin">
         <h2>Tus Grupos</h2>
@@ -50,6 +57,32 @@
             </ul>
         <% } else { %>
             <p>No tienes un grupo creado</p>
+        <% } %>
+    </div>
+
+    <div class="seccion-admin">
+        <h2>Meeti's Anteriores</h2>
+        <% if(anteriores.length > 0 ) { %>
+        <ul>
+            <% anteriores.forEach(meet => { %>
+            <li>
+                <div class="informacion-admin">
+                    <% moment.locale('es'); %>
+                    <% const fecha = meet.fecha +' '+ meet.hora;  %>
+                    <p class="fecha"><%= moment( fecha ).format('LLLL');  %> Horas</p>
+                    <h3><%= meet.titulo %></h3>
+                    <small><%= meet.interesados.length %> Interesados</small>
+                </div>
+                <div class="acciones contenedor-botones">
+                    <a href="/editar-meeti/<%= meet.id %>" class="btn btn-verde">Editar</a>
+                    <a href="/asistentes-meeti/<%= meet.id %>" class="btn btn-azul2">Asistentes</a>
+                    <a href="/eliminar-meeti/<%= meet.id %>" class="btn btn-rojo">Eliminar</a>
+                </div>
+            </li>
+            <% }) %>
+        </ul>
+        <% } else { %>
+            <p>No hay Meeti's Anteriores</p>
         <% } %>
     </div>
 </main>
