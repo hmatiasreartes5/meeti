@@ -10,6 +10,8 @@ const meetiController = require('../controllers/meetiController');
 
 module.exports = function () {
 
+    /**AREA PUBLICA */
+
     router.get('/', homeController.home);
 
     //CONFIRMAR Y CREAR CUENTAS
@@ -20,6 +22,8 @@ module.exports = function () {
     //iniciar sesion
     router.get('/iniciar-sesion',usuariosController.formIniciarSesion);
     router.post('/iniciar-sesion', authController.autenticarUsuario);
+
+    /**AREA PRIVADA */
 
     /**PANEL DE ADMINISTRACION */
     router.get('/administracion',
