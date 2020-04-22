@@ -1,6 +1,7 @@
  const Meeti = require('../../models/Meeti');
  const Grupos = require('../../models/Grupos');
  const Usuarios = require('../../models/Usuarios');
+ const Categorias = require('../../models/Categorias');
 const Sequelize = require('sequelize')
 
  const moment = require('moment');
@@ -79,6 +80,38 @@ const Sequelize = require('sequelize')
         nombrePagina: "Listado de asistentes",
         asistentes
     })
+ }
+
+ //mostrar los proximos meetis por categoria
+ exports.mostrarCategoria = async (req,res,next) => {
+    const categoria = await Categorias.findOne({
+        where: {
+            slug: req.params.categoria
+        },
+        attributes: ['id','nombre']
+    });
+
+    const meetis = await Meeti.findAll({
+        //lo siguiente es como hacer un join
+        include:[
+            {
+                model: Grupos,
+                where: {
+                    categoriaId: categoria.id
+                }
+            },
+            {
+                model: Usuarios
+            }
+        ]
+    });
+
+    res.render('categoria',{
+        nombrePagina: `Categoria: ${categoria.nombre}`,
+        meetis,
+        moment
+    })
+
  }
 
 
