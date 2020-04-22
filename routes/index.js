@@ -7,12 +7,28 @@ const authController = require('../controllers/authController');
 const adminController = require('../controllers/adminController');
 const gruposController = require('../controllers/gruposController');
 const meetiController = require('../controllers/meetiController');
+const meetiControllerFE = require('../controllers/frontend/meetiControllerFE')
 
 module.exports = function () {
 
     /**AREA PUBLICA */
 
     router.get('/', homeController.home);
+
+    /**Meeti */
+    router.get('/meeti/:slug',
+        meetiControllerFE.mostrarMeeti
+    )
+
+    /**Confirmacion y cancelacion de asistencia */
+    router.post('/confirmar-asistencia/:slug',
+        meetiControllerFE.confirmarAsistencia
+    )
+
+    /**Mostrar los asistentes de un meeti */
+    router.get('/asistentes/:slug',
+        meetiControllerFE.asistentesMeeti
+    )
 
     //CONFIRMAR Y CREAR CUENTAS
     router.get('/crear-cuenta',usuariosController.formCrearCuenta);
