@@ -15,6 +15,7 @@ require('dotenv').config({path: 'variables.env'});
 //Modelos
 require('./models/Usuarios');
 require('./models/Categorias');
+require('./models/Comentarios');
 require('./models/Grupos');
 require('./models/Meeti');
 

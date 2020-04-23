@@ -56,20 +56,71 @@
                     <a href="/asistentes/<%= meeti.slug %>">Ver Todos</a>
                 </div>
             </div><!--asistentes-->
+
+            <aside class="informacion">
+                <div class="fecha">
+                    <% moment.locale('es'); %>
+                    <% const fecha = meeti.fecha + ' ' + meeti.hora; %>
+                    <p><%= moment(fecha).format('LLLL') %> Horas</p>
+                </div>
+                <div class="ubicacion">
+                    <p> <%= meeti.direccion %>, <%= meeti.ciudad %>, <%= meeti.estado %>, <%= meeti.pais %> </p>
+                </div>
+                <!--Mapa de ubucacion-->
+                <input type="hidden" id="direccion" value="<%= meeti.direccion %>">
+                <div id="ubicacion-meeti"></div>            
+            </aside>
+
+
+            <div class="comentarios">
+                <h2>Comentarios</h2>
+                <% if(comentarios.length > 0 ) { %>
+                    <% comentarios.forEach(comentario => { %>
+                        <div class="comentario">
+                            <div class="imagen">
+                                <% if(comentario.usuario.imagen) { %>
+                                    <img src="/uploads/perfiles/<%= comentario.usuario.imagen%>"> 
+                                <% } %>
+                            </div>
+                            <div class="texto">
+                                <p><%= comentario.mensaje %></p>
+                                <p>Escrito por: 
+                                    <a href="/mostrar-perfil/<%= comentario.usuario.id %>">
+                                        <%= comentario.usuario.nombre %>
+                                    </a>
+                                </p>
+                                <% if(comentario.usuarioId === usuario.id || meeti.usuarioId === usuario.id ) { %>
+                                    <form action="/eliminar-comentario" method="POST" class="eliminar-comentario">
+                                        <input type="hidden" name="idComentario" value="<%= comentario.id %>">
+                                        <input type="submit" value="Eliminar" class="btn btn-azul">
+                                    </form>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>No hay comentarios aún</p>
+                <% } %>
+          
+                <!--formulario comentarios-->
+                <% if(usuario.id) { %>
+                    <form action="/meeti/<%= meeti.id %>" method="POST" class="default-form comentarios">
+                        <legend>Agrega un comentario</legend>
+                        <div class="campo">
+                            <label>Comentario</label>
+                            <textarea name="comentario"></textarea>
+                        </div>
+                        <div class="campo enviar">
+                            <input type="submit" value="Enviar" class="btn btn-rosa">
+                        </div>
+                    </form>
+                <% } else {  %>
+                    <p>Inicia Sesión para Agregar un Comentario</p>
+                <% } %>
+                <!--/formulario-comentarios-->
+            </div><!--.comentarios-->  
             
-        <aside class="informacion">
-            <div class="fecha">
-                <% moment.locale('es'); %>
-                <% const fecha = meeti.fecha + ' ' + meeti.hora; %>
-                <p><%= moment(fecha).format('LLLL') %> Horas</p>
-            </div>
-            <div class="ubicacion">
-                <p> <%= meeti.direccion %>, <%= meeti.ciudad %>, <%= meeti.estado %>, <%= meeti.pais %> </p>
-            </div>
-            <!--Mapa de ubucacion-->
-            <input type="hidden" id="direccion" value="<%= meeti.direccion %>">
-            <div id="ubicacion-meeti"></div>            
-        </aside>
+        </div>
     </div>
 </main>
 
